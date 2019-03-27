@@ -1,0 +1,24 @@
+instances:
+  - name: zookeeper1
+    id:
+      - 1
+    dns:
+      - zookeeper1
+    ip:
+      - 192.168.253.130
+
+  - name: zookeeper2
+    id:
+      - 2
+    dns:
+      - zookeeper2
+    ip:
+      - 192.168.253.131
+
+  - name: zookeeper3
+    id:
+      - 3
+    dns:
+      - zookeeper3
+    ip:
+      - 192.168.253.132
