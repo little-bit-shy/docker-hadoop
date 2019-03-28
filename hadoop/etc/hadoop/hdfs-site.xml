@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>/usr/local/hadoop/dfs/name</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/usr/local/hadoop/dfs/data</value>
+    </property>
+    <!--指定hdfs的nameservice为nameservices001，需要和core-site.xml中的保持一致 -->
+    <property>
+        <name>dfs.nameservices</name>
+        <value>nameservices001</value>
+    </property>
+    <!-- nameservices001下面有两个NameNode，分别是namenode001，namenode002 ,这儿的namenode001，namenode002也是逻辑名字，可以自己指定，但是指定后下面的也要随之改变-->
+    <property>
+        <name>dfs.ha.namenodes.nameservices001</name>
+        <value>namenode001,namenode002</value>
+    </property>
+    <!-- namenode001的RPC通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc-address.nameservices001.namenode001</name>
+        <value>hadoop001:8020</value>
+    </property>
+    <!-- namenode002的RPC通信地址 -->
+    <property>
+        <name>dfs.namenode.rpc-address.nameservices001.namenode002</name>
+        <value>hadoop002:8020</value>
+    </property>
+    <!-- namenode001的http通信地址 -->
+    <property>
+        <name>dfs.namenode.http-address.nameservices001.namenode001</name>
+        <value>hadoop001:50070</value>
+    </property>
+    <!-- namenode002的http通信地址 -->
+    <property>
+        <name>dfs.namenode.http-address.nameservices001.namenode002</name>
+        <value>hadoop002:50070</value>
+    </property>
+    <!-- 指定NameNode的edits元数据在JournalNode上的存放位置 -->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://hadoop001:8485;hadoop002:8485;hadoop003:8485/nameservices001</value>
+    </property>
+    <!-- 配置失败自动切换实现方式 -->
+    <property>
+        <name>dfs.client.failover.proxy.provider.nameservices001</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+    <!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行-->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>sshfence</value>
+    </property>
+    <!-- 使用sshfence隔离机制时需要ssh免登陆 -->
+    <property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/home/hadoop/.ssh/id_rsa</value>
+    </property>
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/usr/local/hadoop/jn/data</value>
+    </property>
+    <!-- 开启NameNode失败自动切换 -->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+</configuration>

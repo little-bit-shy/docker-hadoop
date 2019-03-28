@@ -1,24 +1,24 @@
 #!/bin/bash
 #zookeeper启动
 
-dir=${PWD}
+dir=/usr/local/hadoop
 
 # 创建容器hosts
-: > ${PWD}/zookeeper/etc/hosts
+: > ${dir}/zookeeper/etc/hosts
 myid=0
 servers=""
-length=`cat ${PWD}/zookeeper/instances.yml | shyaml get-length instances`
-thisServerIpString=(`cat ${PWD}/zookeeper/server.yml | shyaml get-value server.0.ip`)
+length=`cat ${dir}/zookeeper/instances.yml | shyaml get-length instances`
+thisServerIpString=(`cat ${dir}/zookeeper/server.yml | shyaml get-value server.0.ip`)
 thisServerIp=${thisServerIpString[1]}
 for((i=0;i<${length};i++));
 do
-  ipString=(`cat ${PWD}/zookeeper/instances.yml | shyaml get-value instances.${i}.ip`)
-  dnsString=(`cat ${PWD}/zookeeper/instances.yml | shyaml get-value instances.${i}.dns`)
-  idString=(`cat ${PWD}/zookeeper/instances.yml | shyaml get-value instances.${i}.id`)
+  ipString=(`cat ${dir}/zookeeper/instances.yml | shyaml get-value instances.${i}.ip`)
+  dnsString=(`cat ${dir}/zookeeper/instances.yml | shyaml get-value instances.${i}.dns`)
+  idString=(`cat ${dir}/zookeeper/instances.yml | shyaml get-value instances.${i}.id`)
   ip=${ipString[1]}
   dns=${dnsString[1]}
   id=${idString[1]}
-  echo "${ip}   ${dns}" >> ${PWD}/zookeeper/etc/hosts
+  echo "${ip}   ${dns}" >> ${dir}/zookeeper/etc/hosts
   servers="${servers}server.${id}=${dns}:2888:3888 "
   # 判断zookeeper服务id
   if [ "${thisServerIp}" == "${ip}" ] ;then
@@ -31,10 +31,10 @@ done
 docker pull zookeeper:3.4.13
 docker rm $(docker ps -a| grep "zookeeper" |cut -d " " -f 1) -f
 docker run -d --name zookeeper --net=host \
-    -v ${PWD}/zookeeper/etc/hosts:/etc/hosts \
-    -v ${PWD}/zookeeper/datalog:/datalog \
-    -v ${PWD}/zookeeper/logs:/logs \
-    -v ${PWD}/zookeeper/data:/data \
+    -v ${dir}/zookeeper/etc/hosts:/etc/hosts \
+    -v ${dir}/zookeeper/datalog:/datalog \
+    -v ${dir}/zookeeper/logs:/logs \
+    -v ${dir}/zookeeper/data:/data \
     -e ZOO_MY_ID=${myid} \
     -e ZOO_SERVERS="${servers}" \
     zookeeper:3.4.13
