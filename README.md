@@ -56,3 +56,7 @@ bash hadoop.sh
 停止上面节点：stop-dfs.sh  
 全面启动：start-dfs.sh  
 至此hadoop2.x hdfs完全分布式 HA 搭建完毕  
+
+##### 二次启动
+无需重复初次启动时的频繁操作  
+全面启动：start-dfs.sh  
