@@ -46,6 +46,7 @@ systemctl start docker
 bash hadoop.sh  
 
 ##### 初次启动环境初始化  
+首先切换用户：su hadoop  
 启动所有JournalNode：hadoop-daemons.sh start journalnode  
 在其中任意一个namenode上格式化namenode数据：hdfs namenode -format  
 启动刚刚格式化的namenode：hadoop-daemons.sh start namenode  
