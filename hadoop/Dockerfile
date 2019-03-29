@@ -33,6 +33,7 @@ RUN mkdir /home/hadoop/.ssh \
     && chmod 700 /home/hadoop/.ssh
 COPY ./ssh/id_rsa /home/hadoop/.ssh/id_rsa
 COPY ./ssh/authorized_keys /home/hadoop/.ssh/authorized_keys
+RUN chmod 600 /home/hadoop/.ssh/id_rsa
 RUN chmod 600 /home/hadoop/.ssh/authorized_keys
 RUN chown hadoop:hadoop /home/hadoop/.ssh -R
 

@@ -17,6 +17,7 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+    <!--指定hdfs副本数 -->
     <property>
         <name>dfs.replication</name>
         <value>2</value>
@@ -69,10 +70,10 @@
         <name>dfs.client.failover.proxy.provider.nameservices001</name>
         <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
     </property>
-    <!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行-->
+    <!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行，如ssh端口不是hadoop:22则需明确指定，否则将无法成功选举namenide active节点-->
     <property>
         <name>dfs.ha.fencing.methods</name>
-        <value>sshfence</value>
+        <value>sshfence(hadoop:16022)</value>
     </property>
     <!-- 使用sshfence隔离机制时需要ssh免登陆 -->
     <property>
