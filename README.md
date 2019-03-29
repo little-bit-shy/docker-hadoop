@@ -42,7 +42,7 @@ systemctl start docker
 ##### 修改配置文件
 修改hadopo/instances.yml，配置集群信息，用于生成hosts文件  
 
-##### 依次启动环境（zookeeper1、zookeeper2、zookeeper3）  
+##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
 bash hadoop.sh  
 
 ##### 初次启动环境初始化  
