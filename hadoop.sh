@@ -29,5 +29,6 @@ docker run -d --name hadoop --net=host  \
      -v ${dir}/hadoop/dfs:/usr/local/hadoop/dfs \
      -v ${dir}/hadoop/jn:/usr/local/hadoop/jn \
      -v ${dir}/hadoop/tmp:/usr/local/hadoop/tmp \
+     -v ${dir}/hadoop/logs:/usr/local/hadoop/logs \
     hadoop
 docker exec -d hadoop bash -c '/usr/sbin/sshd'
