@@ -40,7 +40,7 @@ systemctl start docker
 秘钥生成方法参考hadoop-key.sh脚本  
 
 ##### 修改配置文件
-修改hadopo/instances.yml，配置集群信息，用于生成hosts文件  
+修改hadoop/instances.yml，配置集群信息，用于生成hosts文件  
 
 ##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
 bash hadoop.sh  
@@ -60,3 +60,12 @@ bash hadoop.sh
 ##### 二次启动
 无需重复初次启动时的频繁操作  
 在hadoop1上全面启动业务：start-dfs.sh  
+
+###### 修改Hive相关配置  
+修改hive/hive-site.xml，配置MySQL用于储存Hive元数据  
+
+###### 初次启动Hive元数据初始化  
+初始化元数据：schematool -initSchema -dbType mysql  
+
+###### 启动Hive  
+启动：hiveserver2 &

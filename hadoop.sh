@@ -30,4 +30,6 @@ docker run -d --name hadoop --net=host  \
      -v ${dir}/hadoop/jn:/usr/local/hadoop/jn \
      -v ${dir}/hadoop/tmp:/usr/local/hadoop/tmp \
      -v ${dir}/hadoop/logs:/usr/local/hadoop/logs \
+     -v ${dir}/hive/conf/hive-site.xml:/usr/local/hive/conf/hive-site.xml \
+     -v ${dir}/hive/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar:/usr/local/hive/lib/mysql-connector-java-5.1.47.jar \
     hadoop

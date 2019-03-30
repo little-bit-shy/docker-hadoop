@@ -1,0 +1,23 @@
+<configuration>
+    <!-- WARNING!!! This file is auto generated for documentation purposes ONLY! -->
+    <!-- WARNING!!! Any changes you make to this file will be ignored by Hive.   -->
+    <!-- WARNING!!! You must make your changes in hive-site.xml instead.         -->
+    <!-- Hive Execution Parameters -->
+    <!-- mysql作元数据储存数据库 -->
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://192.168.253.129:3306/hive?createDatabaseIfNotExist=true</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>root</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value>123456</value>
+    </property>
+</configuration>
