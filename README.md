@@ -47,16 +47,16 @@ bash hadoop.sh
 
 ##### 初次启动环境初始化  
 首先切换用户：su hadoop  
-启动所有JournalNode：hadoop-daemons.sh start journalnode  
-在其中任意一个namenode上格式化namenode数据：hdfs namenode -format  
-启动刚刚格式化的namenode：hadoop-daemons.sh start namenode  
-在任一没有格式化的namenode上执行同步元数据：hdfs namenode -bootstrapStandby  
-启动第二个namenode  
-在其中一个namenode上初始化zkfc：hdfs zkfc -formatZK  
-停止上面节点：stop-dfs.sh  
-全面启动：start-dfs.sh  
+在hadoop1启动所有JournalNode：hadoop-daemons.sh start journalnode  
+在hadoop1上格式化namenode数据：hdfs namenode -format  
+在hadoop1上启动namenode：hadoop-daemon.sh start namenode  
+在hadoop2 上执行同步namenode元数据：hdfs namenode -bootstrapStandby  
+在hadoop2上启动namenode：hadoop-daemon.sh start namenode  
+在hadoop1上初始化zkfc：hdfs zkfc -formatZK  
+在hadoop1上停止业务：stop-dfs.sh  
+在hadoop1上全面启动业务：start-dfs.sh  
 至此hadoop2.x hdfs完全分布式 HA 搭建完毕  
 
 ##### 二次启动
 无需重复初次启动时的频繁操作  
-全面启动：start-dfs.sh  
+在hadoop1上全面启动业务：start-dfs.sh  

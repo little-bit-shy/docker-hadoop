@@ -31,4 +31,3 @@ docker run -d --name hadoop --net=host  \
      -v ${dir}/hadoop/tmp:/usr/local/hadoop/tmp \
      -v ${dir}/hadoop/logs:/usr/local/hadoop/logs \
     hadoop
-docker exec -d hadoop bash -c '/usr/sbin/sshd'

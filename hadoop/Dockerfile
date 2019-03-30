@@ -42,6 +42,6 @@ RUN echo "Port 16022" >> /etc/ssh/sshd_config
 RUN  ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ""
 RUN  ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ""
 RUN  ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
-
-#ENTRYPOINT ["/usr/sbin/sshd"]
-CMD ["/usr/sbin/init"]
+COPY ./entrypoint.sh /tmp/entrypoint.sh
+RUN chmod 777 /tmp/entrypoint.sh
+ENTRYPOINT  /tmp/entrypoint.sh
