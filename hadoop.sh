@@ -34,4 +34,7 @@ docker run -d --name hadoop --net=host  \
     -v ${dir}/hadoop/logs:/usr/local/hadoop/logs \
     -v ${dir}/hive/conf/hive-site.xml:/usr/local/hive/conf/hive-site.xml \
     -v ${dir}/hive/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar:/usr/local/hive/lib/mysql-connector-java-5.1.47.jar \
+    -v ${dir}/sqoop/conf/sqoop-env.sh:/usr/local/sqoop/conf/sqoop-env.sh \
+    -v ${dir}/sqoop/conf/sqoop-site.xml:/usr/local/sqoop/conf/sqoop-site.xml \
+    -v ${dir}/sqoop/java-json-schema/java-json-schema.jar:/usr/local/sqoop/lib/java-json-schema.jar \
     hadoop
