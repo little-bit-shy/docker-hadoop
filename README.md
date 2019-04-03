@@ -54,18 +54,18 @@ bash hadoop.sh
 在hadoop2上启动namenode：hadoop-daemon.sh start namenode  
 在hadoop1上初始化zkfc：hdfs zkfc -formatZK  
 在hadoop1上停止业务：stop-dfs.sh  
-在hadoop1上全面启动业务：start-dfs.sh  
+在hadoop1上全面启动业务：start-all.sh  
 至此hadoop2.x hdfs完全分布式 HA 搭建完毕  
 
 ##### 二次启动
 无需重复初次启动时的频繁操作  
-在hadoop1上全面启动业务：start-dfs.sh  
+在hadoop1上全面启动业务：start-all.sh  
 
 ###### 修改Hive相关配置  
 修改hive/hive-site.xml，配置MySQL用于储存Hive元数据  
 
 ###### 初次启动Hive元数据初始化  
-初始化元数据：schematool -initSchema -dbType mysql  
+在hadoop1上初始化元数据：schematool -initSchema -dbType mysql  
 
 ###### 启动Hive  
-启动：hiveserver2 &
+在hadoop1上启动：hiveserver2 &
