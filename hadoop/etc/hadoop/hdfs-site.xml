@@ -17,6 +17,31 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+    <!--journalnode HTTP服务-->
+    <property>
+        <name>dfs.journalnode.http-address</name>
+        <value>hadoop:8480</value>
+    </property>
+    <!--datanode 服务端口，用于数据传输-->
+    <property>
+        <name>dfs.datanode.address</name>
+        <value>hadoop:50010</value>
+    </property>
+    <!--datanode http服务的端口-->
+    <property>
+        <name>dfs.datanode.http.address</name>
+        <value>hadoop:50075</value>
+    </property>
+    <!--datanode ipc服务的端口-->
+    <property>
+        <name>dfs.datanode.ipc.address</name>
+        <value>hadoop:50020</value>
+    </property>
+    <!--journalnode RPC服务-->
+    <property>
+        <name>dfs.journalnode.rpc-address</name>
+        <value>hadoop:8485</value>
+    </property>
     <!--指定hdfs副本数 -->
     <property>
         <name>dfs.replication</name>
