@@ -15,7 +15,6 @@ systemctl start docker
 
 ### 修改配置文件  
 修改zookeeper/instances.yml，配置集群信息，用于生成hosts、myid文件  
-修改zookeeper/server.yml，配置当前主机信息，用于生成myid文件  
 
 ##### 依次启动环境（zookeeper1、zookeeper2、zookeeper3）  
 bash zookeeper.sh  
@@ -58,7 +57,8 @@ bash hadoop.sh
 至此hadoop2.x hdfs完全分布式 HA 搭建完毕  
 
 ##### 二次启动
-无需重复初次启动时的频繁操作  
+无需重复初次启动时的频繁操作
+首先切换用户：su hadoop    
 在hadoop1上全面启动业务：start-all.sh  
 
 ###### 修改Hive相关配置  
@@ -68,4 +68,5 @@ bash hadoop.sh
 在hadoop1上初始化元数据：schematool -initSchema -dbType mysql  
 
 ###### 启动Hive  
+首先切换用户：su hadoop  
 在hadoop1上启动：hiveserver2 &

@@ -24,7 +24,7 @@
     </property>
     <property>
         <name>fs.default.name</name>
-        <value>hdfs://hadoop001:9000</value>
+        <value>hdfs://hadoop:9000</value>
     </property>
     <!-- 这儿的nameservices001表示两个namenode组建成的逻辑名字 -->
     <property>

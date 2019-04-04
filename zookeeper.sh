@@ -5,11 +5,21 @@ dir=/usr/local/hadoop
 
 # 创建容器hosts
 : > ${dir}/zookeeper/etc/hosts
+
+if [ -f "/usr/sbin/ip" ]
+then
+  thisIps=(`ip addr | grep 'inet' | awk -F" " '{print $2}' | awk -F"/" '{print $1}'`)
+elif [ -f "/usr/sbin/ifconfig" ]
+then
+  thisIps=(`ifconfig |grep "inet"|awk -F" " '{print $2}'`)
+else
+  echo -e “\033[31m 无法获取当前服务器IP地址，退出项目 \033[0m”
+  exit
+fi
+
 myid=0
 servers=""
 length=`cat ${dir}/zookeeper/instances.yml | shyaml get-length instances`
-thisServerIpString=(`cat ${dir}/zookeeper/server.yml | shyaml get-value server.0.ip`)
-thisServerIp=${thisServerIpString[1]}
 for((i=0;i<${length};i++));
 do
   ipString=(`cat ${dir}/zookeeper/instances.yml | shyaml get-value instances.${i}.ip`)
@@ -21,9 +31,12 @@ do
   echo "${ip}   ${dns}" >> ${dir}/zookeeper/etc/hosts
   servers="${servers}server.${id}=${dns}:2888:3888 "
   # 判断zookeeper服务id
-  if [ "${thisServerIp}" == "${ip}" ] ;then
-    myid=${id}
-  fi
+  for thisIp in ${thisIps[@]}
+    do
+      if [ "${thisIp}" == "${ip}" ] ;then
+          myid=${id}
+      fi
+  done
 done
 
 #############################启动zookeeper

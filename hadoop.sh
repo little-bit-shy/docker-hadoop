@@ -10,6 +10,17 @@ chmod 644 ${PWD}/hadoop/known_hosts
 # 创建容器hosts
 : > ${dir}/hadoop/etc/hosts
 
+if [ -f "/usr/sbin/ip" ]
+then
+  thisIps=(`ip addr | grep 'inet' | awk -F" " '{print $2}' | awk -F"/" '{print $1}'`)
+elif [ -f "/usr/sbin/ifconfig" ]
+then
+  thisIps=(`ifconfig |grep "inet"|awk -F" " '{print $2}'`)
+else
+  echo -e “\033[31m 无法获取当前服务器IP地址，退出项目 \033[0m”
+  exit
+fi
+
 length=`cat ${dir}/hadoop/instances.yml | shyaml get-length instances`
 
 for((i=0;i<${length};i++));
@@ -19,6 +30,12 @@ do
   ip=${ipString[1]}
   dns=${dnsString[1]}
   echo "${ip}   ${dns}" >> ${dir}/hadoop/etc/hosts
+  for thisIp in ${thisIps[@]}
+    do
+      if [ "${thisIp}" == "${ip}" ] ;then
+          echo "${ip}   hadoop" >> ${dir}/hadoop/etc/hosts
+      fi
+    done
 done
 
 #############################hadoop
