@@ -1,13 +1,13 @@
 ## Docker依赖搭建  
-##### 安装docker（zookeeper1、zookeeper2、zookeeper3）  
+##### 安装docker  
 如果你已安装可跳过此步骤  
 bash docker.install  
 
-##### 安装shyaml（zookeeper1、zookeeper2、zookeeper3）  
+##### 安装shyaml  
 如果你已安装可跳过此步骤  
 bash compose.install  
 
-##### 启动docker（zookeeper1、zookeeper2、zookeeper3）    
+##### 启动docker   
 systemctl start docker  
 
 ## Zookeeper集群搭建  
