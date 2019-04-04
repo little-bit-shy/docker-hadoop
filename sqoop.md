@@ -1,4 +1,4 @@
-#####测试  
+##### 测试  
 ```bash
 /usr/local/sqoop/bin/sqoop \
 list-databases \
@@ -6,7 +6,7 @@ list-databases \
 --username root \
 --password 123456
 ```
-#####mysql导入hive
+##### mysql导入hive
 ```bash
 # mysql全表导入hive
 bin/sqoop import \
@@ -42,7 +42,7 @@ bin/sqoop import \
 --hive-drop-import-delims # --hive-delims-replacement '-'
 ```
 
-#####job机制
+##### job机制
 ```bash
 # 添加一个增量更新job
 bin/sqoop job --create test -- \
@@ -135,7 +135,7 @@ jdbc.driver.class = com.mysql.jdbc.Driver
 db.batch = false
 ```
 ==通常情况下，我们可以结合sqoop job和crontab等任务调度工具实现相关业务==  
-#####hive导出到mysql
+##### hive导出到mysql
 ```bash
 bin/sqoop export \
 --driver com.mysql.jdbc.Driver \
