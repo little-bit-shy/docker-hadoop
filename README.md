@@ -69,7 +69,8 @@ bash hadoop.sh
 
 ###### 启动Hive  
 首先切换用户：su hadoop  
-在hadoop1上启动：hiveserver2 &
+在hadoop1上启动：hiveserver2 &  
+[Hive使用简介](hive.md)  
 
 ###### 测试Sqoop功能  
 ```bash
@@ -79,3 +80,4 @@ list-databases \
 --username root \
 --password 123456
 ```
+[Sqoop使用简介](sqoop.md)  
