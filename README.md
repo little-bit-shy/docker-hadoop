@@ -74,7 +74,7 @@ bash hadoop.sh
 
 ###### 测试Sqoop功能  
 ```bash
-/usr/local/sqoop/bin/sqoop \
+sqoop \
 list-databases \
 --connect jdbc:mysql://localhost:3306/ \
 --username root \
