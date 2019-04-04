@@ -1,7 +1,4 @@
-## Zookeeper集群搭建  
-### 环境依赖  
-首选准备3台服务器以备使用zookeeper1、zookeeper2 、zookeeper3  
-
+## Docker依赖搭建  
 ##### 安装docker（zookeeper1、zookeeper2、zookeeper3）  
 如果你已安装可跳过此步骤  
 bash docker.install  
@@ -13,6 +10,10 @@ bash compose.install
 ##### 启动docker（zookeeper1、zookeeper2、zookeeper3）    
 systemctl start docker  
 
+## Zookeeper集群搭建  
+### 环境依赖  
+首选准备3台服务器以备使用zookeeper1、zookeeper2 、zookeeper3  
+
 ### 修改配置文件  
 修改zookeeper/instances.yml，配置集群信息，用于生成hosts、myid文件  
 
@@ -22,17 +23,6 @@ bash zookeeper.sh
 ## Hadoop集群搭建  
 ### 环境依赖  
 首选准备3台服务器以备使用hadoop1、hadoop2 、hadoop3  
-
-##### 安装docker（hadoop1、hadoop2 、hadoop3）  
-如果你已安装可跳过此步骤  
-bash docker.install  
-
-##### 安装shyaml（hadoop1、hadoop2 、hadoop3）  
-如果你已安装可跳过此步骤  
-bash compose.install  
-
-##### 启动docker（hadoop1、hadoop2 、hadoop3）    
-systemctl start docker  
 
 ##### 免密码登陆秘钥替换
 ./hadoop/ssh下面默认有一份私钥、公钥，这里建议删除默认秘钥改为自己的私钥  
