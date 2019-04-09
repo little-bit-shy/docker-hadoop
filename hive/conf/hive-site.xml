@@ -20,4 +20,9 @@
         <name>javax.jdo.option.ConnectionPassword</name>
         <value>123456</value>
     </property>
+
+    <property>
+        <name>hive.server2.webui.host</name>
+        <value>hadoop</value>
+    </property>
 </configuration>
