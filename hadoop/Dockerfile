@@ -86,4 +86,9 @@ RUN yum install -y \
     cyrus-sasl-devel \
     cyrus-sasl-gssapi
 
+RUN chown hadoop:hadoop -R /usr/local/hive \
+    && chown hadoop:hadoop -R /usr/local/sqoop \
+    && mkdir /usr/local/pyhive \
+    && chown hadoop:hadoop -R /usr/local/pyhive
+
 ENTRYPOINT  /tmp/entrypoint.sh

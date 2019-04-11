@@ -5,6 +5,9 @@ dir=/usr/local/hadoop
 
 # 修改项目权限
 chown 1000:1000 -R ${PWD}/hadoop
+chown 1000:1000 -R ${PWD}/hive
+chown 1000:1000 -R ${PWD}/sqoop
+chown 1000:1000 -R ${PWD}/pyhive
 chmod 644 ${PWD}/hadoop/known_hosts
 
 # 创建容器hosts
@@ -54,4 +57,5 @@ docker run -d --name hadoop --net=host  \
     -v ${dir}/sqoop/conf/sqoop-env.sh:/usr/local/sqoop/conf/sqoop-env.sh \
     -v ${dir}/sqoop/conf/sqoop-site.xml:/usr/local/sqoop/conf/sqoop-site.xml \
     -v ${dir}/sqoop/java-json-schema/java-json-schema.jar:/usr/local/sqoop/lib/java-json-schema.jar \
+    -v ${dir}/pyhive:/usr/local/pyhive \
     hadoop
