@@ -13,7 +13,7 @@ elif [ -f "/usr/sbin/ifconfig" ]
 then
   thisIps=(`ifconfig |grep "inet"|awk -F" " '{print $2}'`)
 else
-  echo -e “\033[31m 无法获取当前服务器IP地址，退出项目 \033[0m”
+  echo -e "\033[31m 无法获取当前服务器IP地址，退出项目 \033[0m"
   exit
 fi
 
