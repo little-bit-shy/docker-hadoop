@@ -34,8 +34,8 @@ bash zookeeper.sh
 ##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
 bash hadoop.sh  
 
-##### Hadoop启动  
-###### 初次启动环境初始化  
+#### Hadoop启动  
+##### 初次启动环境初始化  
 首先切换用户：su hadoop  
 在hadoop1启动所有JournalNode：hadoop-daemons.sh start journalnode  
 在hadoop1上格式化namenode数据：hdfs namenode -format  
@@ -47,26 +47,26 @@ bash hadoop.sh
 在hadoop1上全面启动业务：start-all.sh  
 至此hadoop2.x hdfs完全分布式 HA 搭建完毕  
 
-###### 二次启动
+##### 二次启动
 无需重复初次启动时的频繁操作
 首先切换用户：su hadoop    
 在hadoop1上全面启动业务：start-all.sh  
 
-##### Hive启动  
-###### 修改Hive相关配置  
+#### Hive启动  
+##### 修改Hive相关配置  
 修改hive/hive-site.xml，配置MySQL用于储存Hive元数据  
 
-###### 初次启动Hive元数据初始化  
+##### 初次启动Hive元数据初始化  
 在hadoop1上初始化元数据：schematool -initSchema -dbType mysql  
 
-###### 启动Hive  
+##### 启动Hive  
 首先切换用户：su hadoop  
 在hadoop1上启动：hiveserver2 &  
 [Hive使用简介](hive.md)  
 [PyHive使用简介](python.md)  
 
-##### Sqoop启动  
-###### 测试Sqoop功能  
+#### Sqoop启动  
+##### 测试Sqoop功能  
 ```bash
 sqoop \
 list-databases \
