@@ -58,5 +58,4 @@ docker run -d --name hadoop --net=host  \
     -v ${dir}/sqoop/conf/sqoop-site.xml:/usr/local/sqoop/conf/sqoop-site.xml \
     -v ${dir}/sqoop/java-json-schema/java-json-schema.jar:/usr/local/sqoop/lib/java-json-schema.jar \
     -v ${dir}/pyhive:/usr/local/pyhive \
-    -v ${dir}/kafka/config:/usr/local/kafka/config \
     hadoop
