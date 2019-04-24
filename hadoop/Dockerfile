@@ -91,4 +91,11 @@ RUN chown hadoop:hadoop -R /usr/local/hive \
     && mkdir /usr/local/pyhive \
     && chown hadoop:hadoop -R /usr/local/pyhive
 
+# kafka安装
+RUN cd /tmp \
+    && mkdir /usr/local/kafka \
+    && wget https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz \
+    && tar -xzf /tmp/kafka_2.11-2.2.0.tgz -C /usr/local/kafka --strip-components=1 \
+    && rm -f /tmp/kafka_2.11-2.2.0.tgz
+
 ENTRYPOINT  /tmp/entrypoint.sh

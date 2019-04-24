@@ -28,14 +28,19 @@ length=`cat ${dir}/hadoop/instances.yml | shyaml get-length instances`
 
 for((i=0;i<${length};i++));
 do
+  hostnameString=(`cat ${dir}/hadoop/instances.yml | shyaml get-value instances.${i}.hostname`)
   ipString=(`cat ${dir}/hadoop/instances.yml | shyaml get-value instances.${i}.ip`)
   dnsString=(`cat ${dir}/hadoop/instances.yml | shyaml get-value instances.${i}.dns`)
+  hostname=${hostnameString[1]}
   ip=${ipString[1]}
   dns=${dnsString[1]}
   echo "${ip}   ${dns}" >> ${dir}/hadoop/etc/hosts
   for thisIp in ${thisIps[@]}
     do
       if [ "${thisIp}" == "${ip}" ] ;then
+          if [ "${hostname}" == "true" ] ;then
+              thisHostname=${dns}
+          fi
           echo "${ip}   hadoop" >> ${dir}/hadoop/etc/hosts
       fi
     done
@@ -44,7 +49,7 @@ done
 #############################hadoop
 docker build --network host -t hadoop ${dir}/hadoop
 docker rm $(docker ps -a| grep "hadoop" |cut -d " " -f 1) -f
-docker run -d --name hadoop --net=host  \
+docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/hadoop/known_hosts:/home/hadoop/.ssh/known_hosts \
     -v ${dir}/hadoop/etc/hosts:/etc/hosts \
     -v ${dir}/hadoop/etc/hadoop:/usr/local/hadoop/etc/hadoop \
@@ -58,4 +63,5 @@ docker run -d --name hadoop --net=host  \
     -v ${dir}/sqoop/conf/sqoop-site.xml:/usr/local/sqoop/conf/sqoop-site.xml \
     -v ${dir}/sqoop/java-json-schema/java-json-schema.jar:/usr/local/sqoop/lib/java-json-schema.jar \
     -v ${dir}/pyhive:/usr/local/pyhive \
+    -v ${dir}/kafka/config:/usr/local/kafka/config \
     hadoop

@@ -1,35 +1,47 @@
 instances:
   - name: hadoop001
+    hostname:
+      - true
     dns:
       - hadoop001
     ip:
-      - 192.168.253.130
+      - 192.168.253.133
 
   - name: hadoop002
+    hostname:
+      - true
     dns:
       - hadoop002
     ip:
       - 192.168.253.131
 
   - name: hadoop003
+    hostname:
+      - true
     dns:
       - hadoop003
     ip:
       - 192.168.253.132
 
   - name: zookeeper001
+    hostname:
+      - false
     dns:
       - zookeeper001
     ip:
-      - 192.168.253.130
+      - 192.168.253.133
 
   - name: zookeeper002
+    hostname:
+      - false
     dns:
       - zookeeper002
     ip:
       - 192.168.253.131
 
   - name: zookeeper003
+    hostname:
+      - false
     dns:
       - zookeeper003
     ip:

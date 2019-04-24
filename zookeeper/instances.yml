@@ -1,13 +1,17 @@
 instances:
   - name: zookeeper1
+    hostname:
+      - true
     id:
       - 1
     dns:
       - zookeeper1
     ip:
-      - 192.168.253.130
+      - 192.168.253.133
 
   - name: zookeeper2
+    hostname:
+      - true
     id:
       - 2
     dns:
@@ -16,6 +20,8 @@ instances:
       - 192.168.253.131
 
   - name: zookeeper3
+    hostname:
+      - true
     id:
       - 3
     dns:
