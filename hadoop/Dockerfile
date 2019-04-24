@@ -98,4 +98,6 @@ RUN cd /tmp \
     && tar -xzf /tmp/kafka_2.11-2.2.0.tgz -C /usr/local/kafka --strip-components=1 \
     && rm -f /tmp/kafka_2.11-2.2.0.tgz
 
+RUN chown hadoop:hadoop -R /usr/local/kafka \
+
 ENTRYPOINT  /tmp/entrypoint.sh

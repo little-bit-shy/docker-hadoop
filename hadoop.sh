@@ -8,6 +8,7 @@ chown 1000:1000 -R ${PWD}/hadoop
 chown 1000:1000 -R ${PWD}/hive
 chown 1000:1000 -R ${PWD}/sqoop
 chown 1000:1000 -R ${PWD}/pyhive
+chown 1000:1000 -R ${PWD}/kafka
 chmod 644 ${PWD}/hadoop/known_hosts
 
 # 创建容器hosts
