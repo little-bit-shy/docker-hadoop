@@ -1,18 +1,24 @@
 FROM centos:7
 
+ENV HADOOP_URL=https://www-us.apache.org/dist/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
+ENV HIVE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz
+ENV SQOOP_URL=http://mirrors.hust.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
+ENV KAFKA_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz
+
 RUN yum install -y \
     wget \
     java-1.8.0-openjdk*
 
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HIVE_HOME /usr/local/hive
+ENV KAFKA_HOME /usr/local/kafka
 ENV HADOOP_MAPRED_HOME $HADOOP_HOME
 ENV SQOOP_HOME /usr/local/sqoop
 ENV HADOOP_COMMON_HOME $HADOOP_HOME
 ENV HADOOP_HDFS_HOME $HADOOP_HOME
 ENV YARN_HOME $HADOOP_HOME
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_HOME/lib/native
-ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin
+ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$KAFKA_HOME/bin
 ENV HADOOP_INSTALL $HADOOP_HOME
 ENV HADOOP_CLASSPATH $HADOOP_HOME/lib/*
 ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:$HIVE_HOME/lib/*
@@ -20,7 +26,7 @@ ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:$HIVE_HOME/lib/*
 # hadoop安装
 RUN cd /tmp \
     && mkdir /usr/local/hadoop \
-    && wget http://mirrors.shu.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz \
+    && wget ${HADOOP_URL} \
     && tar -xzf /tmp/hadoop-2.9.2.tar.gz -C /usr/local/hadoop --strip-components=1 \
     && rm -f /tmp/hadoop-2.9.2.tar.gz
 
@@ -54,14 +60,14 @@ RUN chmod 777 /tmp/entrypoint.sh
 # hive安装
 RUN cd /tmp \
     && mkdir /usr/local/hive \
-    && wget https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz \
+    && wget ${HIVE_URL} \
     && tar -xzf /tmp/apache-hive-2.3.4-bin.tar.gz -C /usr/local/hive --strip-components=1 \
     && rm -f /tmp/apache-hive-2.3.4-bin.tar.gz
 
 # sqoop安装
 RUN cd /tmp \
     && mkdir /usr/local/sqoop \
-    && wget http://mirrors.hust.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz   \
+    && wget ${SQOOP_URL}   \
     && tar -xzf /tmp/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C /usr/local/sqoop --strip-components=1 \
     && rm -f /tmp/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
 
@@ -94,10 +100,9 @@ RUN chown hadoop:hadoop -R /usr/local/hive \
 # kafka安装
 RUN cd /tmp \
     && mkdir /usr/local/kafka \
-    && wget https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz \
+    && wget ${KAFKA_URL} \
     && tar -xzf /tmp/kafka_2.11-2.2.0.tgz -C /usr/local/kafka --strip-components=1 \
-    && rm -f /tmp/kafka_2.11-2.2.0.tgz
-
-RUN chown hadoop:hadoop -R /usr/local/kafka \
+    && rm -f /tmp/kafka_2.11-2.2.0.tgz \
+    && chown hadoop:hadoop -R /usr/local/kafka
 
 ENTRYPOINT  /tmp/entrypoint.sh
