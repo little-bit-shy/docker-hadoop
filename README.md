@@ -75,3 +75,7 @@ list-databases \
 --password 123456
 ```
 [Sqoop使用简介](sqoop.md)  
+
+#### Kafka启动  
+##### 测试Sqoop功能  
+[Kafka使用简介](kafka.md)  
