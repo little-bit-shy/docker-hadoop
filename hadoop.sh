@@ -50,7 +50,7 @@ done
 #############################hadoop
 docker build --network host -t hadoop ${dir}/hadoop
 docker rm $(docker ps -a| grep "hadoop" |cut -d " " -f 1) -f
-docker run -d --name hadoop --net=host --hostname ${thisHostname} \
+docker run -d --name hadoop --net=host --hostname=${thisHostname} \
     -v ${dir}/hadoop/known_hosts:/home/hadoop/.ssh/known_hosts \
     -v ${dir}/hadoop/etc/hosts:/etc/hosts \
     -v ${dir}/hadoop/etc/hadoop:/usr/local/hadoop/etc/hadoop \
