@@ -4,12 +4,12 @@
 dir=$(cd `dirname $0`; pwd)
 
 # 修改项目权限
-chown 1000:1000 -R ${PWD}/hadoop
-chown 1000:1000 -R ${PWD}/hive
-chown 1000:1000 -R ${PWD}/sqoop
-chown 1000:1000 -R ${PWD}/pyhive
-chown 1000:1000 -R ${PWD}/kafka
-chmod 644 ${PWD}/hadoop/known_hosts
+chown 1000:1000 -R ${dir}/hadoop
+chown 1000:1000 -R ${dir}/hive
+chown 1000:1000 -R ${dir}/sqoop
+chown 1000:1000 -R ${dir}/pyhive
+chown 1000:1000 -R ${dir}/kafka
+chmod 644 ${dir}/hadoop/known_hosts
 
 # 创建容器hosts
 : > ${dir}/hadoop/etc/hosts
