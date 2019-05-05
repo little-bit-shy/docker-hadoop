@@ -1,7 +1,7 @@
 #!/bin/bash
 #zookeeper启动
 
-dir=/usr/local/hadoop
+dir=$(cd `dirname $0`; pwd)
 
 # 创建容器hosts
 : > ${dir}/zookeeper/etc/hosts

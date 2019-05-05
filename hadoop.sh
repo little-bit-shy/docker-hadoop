@@ -1,7 +1,7 @@
 #!/bin/bash
 #zookeeper启动
 
-dir=/usr/local/hadoop
+dir=$(cd `dirname $0`; pwd)
 
 # 修改项目权限
 chown 1000:1000 -R ${PWD}/hadoop

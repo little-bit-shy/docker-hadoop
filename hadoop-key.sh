@@ -1,7 +1,7 @@
 #!/bin/bash
 #hadoop集群免密码登陆秘钥生成
 
-dir=.
+dir=$(cd `dirname $0`; pwd)
 
 ssh-keygen -t rsa -f "${dir}/hadoop/ssh/id_rsa"
 
