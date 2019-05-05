@@ -48,7 +48,7 @@ done
 # 如果使用环境变量来定义相关配置则不应挂载zoo.cfg脚本，系统会通过环境变量生成zoo.cfg配置文件
 docker pull zookeeper:3.4.13
 docker rm $(docker ps -a| grep "zookeeper" |cut -d " " -f 1) -f
-docker run -d --name zookeeper --net=host --hostname=${thisHostname} \
+docker run -d --name zookeeper --net=host --hostname ${thisHostname} \
     -v ${dir}/zookeeper/etc/hosts:/etc/hosts \
     -v ${dir}/zookeeper/datalog:/datalog \
     -v ${dir}/zookeeper/logs:/logs \
