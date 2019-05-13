@@ -70,5 +70,5 @@ docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/hbase/logs:/usr/local/hbase/logs \
     -v ${dir}/hbase/conf:/usr/local/hbase/conf \
     -v ${dir}/hbase/tmp:/usr/local/hbase/tmp \
-    -v ${dir}/hbase/zkData:/usr/local/hbase/zkData \
+    -v ${dir}/hadoop/etc/hadoop/hdfs-site.xml:/usr/local/hbase/conf/hdfs-site.xml \
     hadoop

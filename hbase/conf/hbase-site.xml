@@ -33,9 +33,10 @@
         <name>hbase.tmp.dir</name>
         <value>/usr/local/hbase/tmp</value>
     </property>
+    <!--hbase.rootdir的值设置使用的是基于Hadoop Namenode HA的nameservice-->
     <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://hadoop001:8020/hbase</value>
+        <value>hdfs://nameservices001/hbase</value>
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
