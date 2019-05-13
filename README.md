@@ -65,6 +65,10 @@ bash hadoop.sh
 [Hive使用简介](hive.md)  
 [PyHive使用简介](python.md)  
 
+#### Hbase启动  
+首先切换用户：su hadoop  
+在hadoop1上启动：start-hbase.sh  
+
 #### Sqoop启动  
 ##### 测试Sqoop功能  
 ```bash
