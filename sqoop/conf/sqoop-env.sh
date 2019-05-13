@@ -26,7 +26,7 @@ export HADOOP_COMMON_HOME=/usr/local/hadoop
 export HADOOP_MAPRED_HOME=/usr/local/hadoop
 
 #set the path to where bin/hbase is available
-#export HBASE_HOME=
+export HBASE_HOME=/usr/local/hbase
 
 #Set the path to where bin/hive is available
 export HIVE_HOME=/usr/local/hive

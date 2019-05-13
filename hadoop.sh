@@ -9,6 +9,7 @@ chown 1000:1000 -R ${dir}/hive
 chown 1000:1000 -R ${dir}/sqoop
 chown 1000:1000 -R ${dir}/pyhive
 chown 1000:1000 -R ${dir}/kafka
+chown 1000:1000 -R ${dir}/hbase
 chmod 644 ${dir}/hadoop/known_hosts
 
 # 创建容器hosts
@@ -51,7 +52,6 @@ done
 docker build --network host -t hadoop ${dir}/hadoop
 docker rm $(docker ps -a| grep "hadoop" |cut -d " " -f 1) -f
 docker run -d --name hadoop --net=host --hostname ${thisHostname} \
-    -v ${dir}/hadoop/known_hosts:/home/hadoop/.ssh/known_hosts \
     -v ${dir}/hadoop/etc/hosts:/etc/hosts \
     -v ${dir}/hadoop/etc/hadoop:/usr/local/hadoop/etc/hadoop \
     -v ${dir}/hadoop/dfs:/usr/local/hadoop/dfs \
@@ -67,4 +67,8 @@ docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/kafka/config:/usr/local/kafka/config \
     -v ${dir}/kafka/kafka-logs:/usr/local/kafka/kafka-logs \
     -v ${dir}/kafka/logs:/usr/local/kafka/logs \
+    -v ${dir}/hbase/logs:/usr/local/hbase/logs \
+    -v ${dir}/hbase/conf:/usr/local/hbase/conf \
+    -v ${dir}/hbase/tmp:/usr/local/hbase/tmp \
+    -v ${dir}/hbase/zkData:/usr/local/hbase/zkData \
     hadoop
