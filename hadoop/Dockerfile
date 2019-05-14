@@ -1,10 +1,12 @@
 FROM centos:7
 
-ENV HADOOP_URL=https://www-us.apache.org/dist/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
-ENV HIVE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz
-ENV SQOOP_URL=http://mirrors.hust.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
-ENV KAFKA_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz
-ENV HBASE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz
+ENV HADOOP_FILE=hadoop.tar.gz
+ENV HIVE_FILE=hive.tar.gz
+ENV SQOOP_FILE=sqoop.tar.gz
+ENV KAFKA_FILE=kafka.tgz
+ENV HBASE_FILE=hbase.tar.gz
+ENV SPARK_FILE=spark.tgz
+ENV SCALA_FILE=scala.tgz
 
 RUN yum install -y \
     wget \
@@ -16,23 +18,25 @@ ENV HIVE_HOME /usr/local/hive
 ENV PYHIVE_HOME /usr/local/pyhive
 ENV KAFKA_HOME /usr/local/kafka
 ENV HBASE_HOME /usr/local/hbase
+ENV SPARK_HOME /usr/local/spark
+ENV SCALA_HOME /usr/local/scala
 ENV HADOOP_MAPRED_HOME $HADOOP_HOME
 ENV SQOOP_HOME /usr/local/sqoop
 ENV HADOOP_COMMON_HOME $HADOOP_HOME
 ENV HADOOP_HDFS_HOME $HADOOP_HOME
 ENV YARN_HOME $HADOOP_HOME
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_HOME/lib/native
-ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$KAFKA_HOME/bin:$HBASE_HOME/bin
+ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$KAFKA_HOME/bin:$HBASE_HOME/bin:$SPARK_HOME/bin:$SCALA_HOME/bin
 ENV HADOOP_INSTALL $HADOOP_HOME
 ENV HADOOP_CLASSPATH $HADOOP_HOME/lib/*
 ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:$HIVE_HOME/lib/*
 
 # hadoop安装
+COPY ./tar/${HADOOP_FILE} /tmp/${HADOOP_FILE}
 RUN cd /tmp \
     && mkdir ${HADOOP_HOME} \
-    && wget ${HADOOP_URL} \
-    && tar -xzf /tmp/hadoop-2.9.2.tar.gz -C ${HADOOP_HOME} --strip-components=1 \
-    && rm -f /tmp/hadoop-2.9.2.tar.gz
+    && tar -xzf /tmp/${HADOOP_FILE} -C ${HADOOP_HOME} --strip-components=1 \
+    && rm -f /tmp/${HADOOP_FILE}
 
 WORKDIR ${HADOOP_HOME}
 
@@ -62,18 +66,18 @@ COPY ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod 777 /tmp/entrypoint.sh
 
 # hive安装
+COPY ./tar/${HIVE_FILE} /tmp/${HIVE_FILE}
 RUN cd /tmp \
     && mkdir ${HIVE_HOME} \
-    && wget ${HIVE_URL} \
-    && tar -xzf /tmp/apache-hive-2.3.4-bin.tar.gz -C ${HIVE_HOME} --strip-components=1 \
-    && rm -f /tmp/apache-hive-2.3.4-bin.tar.gz
+    && tar -xzf /tmp/${HIVE_FILE} -C ${HIVE_HOME} --strip-components=1 \
+    && rm -f /tmp/${HIVE_FILE}
 
 # sqoop安装
+COPY ./tar/${SQOOP_FILE} /tmp/${SQOOP_FILE}
 RUN cd /tmp \
     && mkdir ${SQOOP_HOME} \
-    && wget ${SQOOP_URL}   \
-    && tar -xzf /tmp/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C ${SQOOP_HOME} --strip-components=1 \
-    && rm -f /tmp/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
+    && tar -xzf /tmp/${SQOOP_FILE} -C ${SQOOP_HOME} --strip-components=1 \
+    && rm -f /tmp/${SQOOP_FILE}
 
 RUN yum install -y epel-release \
     && yum install -y python-pip \
@@ -102,19 +106,34 @@ RUN chown hadoop:hadoop -R ${HIVE_HOME} \
     && chown hadoop:hadoop -R ${PYHIVE_HOME}
 
 # kafka安装
+COPY ./tar/${KAFKA_FILE} /tmp/${KAFKA_FILE}
 RUN cd /tmp \
     && mkdir ${KAFKA_HOME} \
-    && wget ${KAFKA_URL} \
-    && tar -xzf /tmp/kafka_2.11-2.2.0.tgz -C ${KAFKA_HOME} --strip-components=1 \
-    && rm -f /tmp/kafka_2.11-2.2.0.tgz \
+    && tar -xzf /tmp/${KAFKA_FILE} -C ${KAFKA_HOME} --strip-components=1 \
+    && rm -f /tmp/${KAFKA_FILE} \
     && chown hadoop:hadoop -R ${KAFKA_HOME}
 
 # hbase安装
+COPY ./tar/${HBASE_FILE} /tmp/${HBASE_FILE}
 RUN cd /tmp \
     && mkdir ${HBASE_HOME} \
-    && wget ${HBASE_URL} \
-    && tar -xzf /tmp/hbase-1.4.9-bin.tar.gz -C ${HBASE_HOME} --strip-components=1 \
-    && rm -f /tmp/hbase-1.4.9-bin.tar.gz \
+    && tar -xzf /tmp/${HBASE_FILE} -C ${HBASE_HOME} --strip-components=1 \
+    && rm -f /tmp/${HBASE_FILE} \
     && chown hadoop:hadoop -R ${HBASE_HOME}
+
+# sqark安装
+COPY ./tar/${SPARK_FILE} /tmp/${SPARK_FILE}
+RUN cd /tmp \
+    && mkdir ${SPARK_HOME} \
+    && tar -xzf /tmp/${SPARK_FILE} -C ${SPARK_HOME} --strip-components=1 \
+    && rm -f /tmp/${SPARK_FILE} \
+    && chown hadoop:hadoop -R ${SPARK_HOME}
+
+# scala安装
+COPY ./tar/${SCALA_FILE} /tmp/${SCALA_FILE}
+RUN cd /tmp \
+    && mkdir ${SCALA_HOME} \
+    && tar -xzf /tmp/${SCALA_FILE} -C ${SCALA_HOME} --strip-components=1 \
+    && rm -f /tmp/${SCALA_FILE}
 
 ENTRYPOINT  /tmp/entrypoint.sh

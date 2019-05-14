@@ -3,6 +3,37 @@
 
 dir=$(cd `dirname $0`; pwd)
 
+# 相关安装包下载
+HADOOP_URL=https://www-us.apache.org/dist/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
+HIVE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz
+SQOOP_URL=http://mirrors.hust.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
+KAFKA_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz
+HBASE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz
+SPARK_URL=https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz
+SCALA_URL=https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz
+
+if [ ! -f "${dir}/hadoop/tar/hadoop.tar.gz" ];then
+  wget ${HADOOP_URL} -O ${dir}/hadoop/tar/hadoop.tar.gz
+fi
+if [ ! -f "${dir}/hadoop/tar/hive.tar.gz" ];then
+  wget ${HIVE_URL} -O ${dir}/hadoop/tar/hive.tar.gz
+fi
+if [ ! -f "${dir}/hadoop/tar/sqoop.tar.gz" ];then
+  wget ${SQOOP_URL} -O ${dir}/hadoop/tar/sqoop.tar.gz
+fi
+if [ ! -f "${dir}/hadoop/tar/kafka.tgz" ];then
+  wget ${KAFKA_URL} -O ${dir}/hadoop/tar/kafka.tgz
+fi
+if [ ! -f "${dir}/hadoop/tar/hbase.tar.gz" ];then
+  wget ${HBASE_URL} -O ${dir}/hadoop/tar/hbase.tar.gz
+fi
+if [ ! -f "${dir}/hadoop/tar/spark.tgz" ];then
+  wget ${HBASE_URL} -O ${dir}/hadoop/tar/spark.tgz
+fi
+if [ ! -f "${dir}/hadoop/tar/scala.tgz" ];then
+  wget ${SCALA_URL} -O ${dir}/hadoop/tar/scala.tgz
+fi
+
 # 修改项目权限
 chown 1000:1000 -R ${dir}/hadoop
 chown 1000:1000 -R ${dir}/hive
@@ -10,6 +41,7 @@ chown 1000:1000 -R ${dir}/sqoop
 chown 1000:1000 -R ${dir}/pyhive
 chown 1000:1000 -R ${dir}/kafka
 chown 1000:1000 -R ${dir}/hbase
+chown 1000:1000 -R ${dir}/spark
 chmod 644 ${dir}/hadoop/known_hosts
 
 # 创建容器hosts
@@ -71,4 +103,7 @@ docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/hbase/conf:/usr/local/hbase/conf \
     -v ${dir}/hbase/tmp:/usr/local/hbase/tmp \
     -v ${dir}/hadoop/etc/hadoop/hdfs-site.xml:/usr/local/hbase/conf/hdfs-site.xml \
+    -v ${dir}/spark/conf:/usr/local/spark/conf \
+    -v ${dir}/spark/data:/usr/local/spark/data \
+    -v ${dir}/spark/logs:/usr/local/spark/logs \
     hadoop

@@ -83,5 +83,8 @@ list-databases \
 #### Kafka启动  
 首先切换用户：su hadoop  
 kafka-server-start.sh -daemon /usr/local/kafka/config/zookeeper.properties  
-##### 测试Sqoop功能  
 [Kafka使用简介](kafka.md)  
+
+#### Spark启动  
+首先切换用户：su hadoop  
+在hadoop1上启动：/usr/local/spark/sbin/start-all.sh  

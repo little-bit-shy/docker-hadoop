@@ -135,4 +135,4 @@ export HBASE_MANAGES_ZK=false
 # HBASE_ROOT_LOGGER=INFO,DRFA
 # The reason for changing default to RFA is to avoid the boundary case of filling out disk space as 
 # DRFA doesn't put any cap on the log size. Please refer to HBase-5655 for more context.
-export HBASE_SSH_OPTS="-p 16022 -o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR"
+export HBASE_SSH_OPTS="-o StrictHostKeyChecking=no -p 16022 -o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR"
