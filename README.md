@@ -86,3 +86,4 @@ kafka-server-start.sh -daemon ${KAFKA_HOME}/config/zookeeper.properties
 #### Kylin启动  
 在hadoop1启动mr-jobhistory：mr-jobhistory-daemon.sh start historyserver  
 在hadoop1上启动：kylin.sh start  
+初始用户名和密码为ADMIN/KYLIN  

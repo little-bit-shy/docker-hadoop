@@ -100,6 +100,7 @@ docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/sqoop/conf/sqoop-env.sh:/usr/local/sqoop/conf/sqoop-env.sh \
     -v ${dir}/sqoop/conf/sqoop-site.xml:/usr/local/sqoop/conf/sqoop-site.xml \
     -v ${dir}/sqoop/java-json-schema/java-json-schema.jar:/usr/local/sqoop/lib/java-json-schema.jar \
+    -v ${dir}/sqoop/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar:/usr/local/sqoop/lib/mysql-connector-java-5.1.47.jar \
     -v ${dir}/pyhive:/usr/local/pyhive \
     -v ${dir}/kafka/config:/usr/local/kafka/config \
     -v ${dir}/kafka/kafka-logs:/usr/local/kafka/kafka-logs \
