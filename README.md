@@ -36,7 +36,6 @@ bash hadoop.sh
 
 #### Hadoop启动  
 ##### 初次启动环境初始化  
-首先切换用户：su hadoop  
 在hadoop1启动所有JournalNode：hadoop-daemons.sh start journalnode  
 在hadoop1上格式化namenode数据：hdfs namenode -format  
 在hadoop1上启动namenode：hadoop-daemon.sh start namenode  
@@ -49,7 +48,6 @@ bash hadoop.sh
 
 ##### 二次启动
 无需重复初次启动时的频繁操作
-首先切换用户：su hadoop    
 在hadoop1上全面启动业务：start-all.sh  
 
 #### Hive启动  
@@ -60,13 +58,11 @@ bash hadoop.sh
 在hadoop1上初始化元数据：schematool -initSchema -dbType mysql  
 
 ##### 启动Hive  
-首先切换用户：su hadoop  
 在hadoop1上启动：hiveserver2 &  
 [Hive使用简介](hive.md)  
 [PyHive使用简介](python.md)  
 
 #### Hbase启动  
-首先切换用户：su hadoop  
 在hadoop1上启动：start-hbase.sh  
 
 #### Sqoop启动  
@@ -81,10 +77,12 @@ list-databases \
 [Sqoop使用简介](sqoop.md)  
 
 #### Kafka启动  
-首先切换用户：su hadoop  
-kafka-server-start.sh -daemon /usr/local/kafka/config/zookeeper.properties  
+kafka-server-start.sh -daemon ${KAFKA_HOME}/config/zookeeper.properties  
 [Kafka使用简介](kafka.md)  
 
 #### Spark启动  
-首先切换用户：su hadoop  
-在hadoop1上启动：/usr/local/spark/sbin/start-all.sh  
+在hadoop1上启动：${SPARK_HOME}/sbin/start-all.sh  
+
+#### Kylin启动  
+在hadoop1启动mr-jobhistory：mr-jobhistory-daemon.sh start historyserver  
+在hadoop1上启动：kylin.sh start  

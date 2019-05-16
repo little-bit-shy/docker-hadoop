@@ -11,6 +11,7 @@ KAFKA_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2
 HBASE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz
 SPARK_URL=https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz
 SCALA_URL=https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz
+KYLIN_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kylin/apache-kylin-3.0.0-alpha/apache-kylin-3.0.0-alpha-bin-hbase1x.tar.gz
 
 if [ ! -f "${dir}/hadoop/tar/hadoop.tar.gz" ];then
   wget ${HADOOP_URL} -O ${dir}/hadoop/tar/hadoop.tar.gz
@@ -33,6 +34,9 @@ fi
 if [ ! -f "${dir}/hadoop/tar/scala.tgz" ];then
   wget ${SCALA_URL} -O ${dir}/hadoop/tar/scala.tgz
 fi
+if [ ! -f "${dir}/hadoop/tar/kylin.tar.gz" ];then
+  wget ${KYLIN_URL} -O ${dir}/hadoop/tar/kylin.tar.gz
+fi
 
 # 修改项目权限
 chown 1000:1000 -R ${dir}/hadoop
@@ -42,6 +46,7 @@ chown 1000:1000 -R ${dir}/pyhive
 chown 1000:1000 -R ${dir}/kafka
 chown 1000:1000 -R ${dir}/hbase
 chown 1000:1000 -R ${dir}/spark
+chown 1000:1000 -R ${dir}/kylin
 chmod 644 ${dir}/hadoop/known_hosts
 
 # 创建容器hosts
@@ -106,4 +111,6 @@ docker run -d --name hadoop --net=host --hostname ${thisHostname} \
     -v ${dir}/spark/conf:/usr/local/spark/conf \
     -v ${dir}/spark/data:/usr/local/spark/data \
     -v ${dir}/spark/logs:/usr/local/spark/logs \
+    -v ${dir}/kylin/conf:/usr/local/kylin/conf \
+    -v ${dir}/kylin/logs:/usr/local/kylin/logs \
     hadoop

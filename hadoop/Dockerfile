@@ -7,10 +7,7 @@ ENV KAFKA_FILE=kafka.tgz
 ENV HBASE_FILE=hbase.tar.gz
 ENV SPARK_FILE=spark.tgz
 ENV SCALA_FILE=scala.tgz
-
-RUN yum install -y \
-    wget \
-    java-1.8.0-openjdk*
+ENV KYLIN_FILE=kylin.tar.gz
 
 ENV SSH_PORT = 16022
 ENV HADOOP_HOME /usr/local/hadoop
@@ -20,16 +17,23 @@ ENV KAFKA_HOME /usr/local/kafka
 ENV HBASE_HOME /usr/local/hbase
 ENV SPARK_HOME /usr/local/spark
 ENV SCALA_HOME /usr/local/scala
+ENV KYLIN_HOME /usr/local/kylin
 ENV HADOOP_MAPRED_HOME $HADOOP_HOME
 ENV SQOOP_HOME /usr/local/sqoop
 ENV HADOOP_COMMON_HOME $HADOOP_HOME
 ENV HADOOP_HDFS_HOME $HADOOP_HOME
 ENV YARN_HOME $HADOOP_HOME
 ENV HADOOP_COMMON_LIB_NATIVE_DIR $HADOOP_HOME/lib/native
-ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$KAFKA_HOME/bin:$HBASE_HOME/bin:$SPARK_HOME/bin:$SCALA_HOME/bin
+ENV PATH $PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$KAFKA_HOME/bin:$HBASE_HOME/bin:$SPARK_HOME/bin:$SCALA_HOME/bin:$KYLIN_HOME/bin
 ENV HADOOP_INSTALL $HADOOP_HOME
 ENV HADOOP_CLASSPATH $HADOOP_HOME/lib/*
-ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:$HIVE_HOME/lib/*
+ENV HADOOP_OPTS "-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_COMMON_LIB_NATIVE_DIR"
+
+RUN yum install -y \
+    wget \
+    net-tools \
+    sudo \
+    java-1.8.0-openjdk*
 
 # hadoop安装
 COPY ./tar/${HADOOP_FILE} /tmp/${HADOOP_FILE}
@@ -41,6 +45,7 @@ RUN cd /tmp \
 WORKDIR ${HADOOP_HOME}
 
 RUN useradd hadoop \
+    && echo "hadoop    ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers \
     && chown hadoop:hadoop -R ${HADOOP_HOME}
 
 # ssl安装（免密码登陆）
@@ -121,7 +126,7 @@ RUN cd /tmp \
     && rm -f /tmp/${HBASE_FILE} \
     && chown hadoop:hadoop -R ${HBASE_HOME}
 
-# sqark安装
+# spark安装
 COPY ./tar/${SPARK_FILE} /tmp/${SPARK_FILE}
 RUN cd /tmp \
     && mkdir ${SPARK_HOME} \
@@ -135,5 +140,15 @@ RUN cd /tmp \
     && mkdir ${SCALA_HOME} \
     && tar -xzf /tmp/${SCALA_FILE} -C ${SCALA_HOME} --strip-components=1 \
     && rm -f /tmp/${SCALA_FILE}
+
+# kylin安装
+COPY ./tar/${KYLIN_FILE} /tmp/${KYLIN_FILE}
+RUN cd /tmp \
+    && mkdir ${KYLIN_HOME} \
+    && tar -xzf /tmp/${KYLIN_FILE} -C ${KYLIN_HOME} --strip-components=1 \
+    && rm -f /tmp/${KYLIN_FILE} \
+    && chown hadoop:hadoop -R ${KYLIN_HOME}
+
+USER hadoop
 
 ENTRYPOINT  /tmp/entrypoint.sh
