@@ -33,3 +33,4 @@ export HIVE_HOME=/usr/local/hive
 
 #Set the path for where zookeper config dir is
 #export ZOOCFGDIR=
+export HADOOP_CLASSPATH=/usr/local/hadoop/lib/*:/usr/local/hive/lib/*

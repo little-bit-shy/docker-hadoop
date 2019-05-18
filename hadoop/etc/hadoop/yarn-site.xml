@@ -25,7 +25,7 @@
 　　</property>
     <property>
 　　　　<name>yarn.resourcemanager.hostname</name>
-　　　　<value>hadoop</value>
+　　　　<value>hadoop001</value>
 　　</property>
 　　<property>
 　　　　<name>yarn.nodemanager.aux-services</name>

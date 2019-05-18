@@ -77,6 +77,7 @@ COPY ./tar/${HIVE_FILE} /tmp/${HIVE_FILE}
 RUN cd /tmp \
     && mkdir ${HIVE_HOME} \
     && tar -xzf /tmp/${HIVE_FILE} -C ${HIVE_HOME} --strip-components=1 \
+    && rm -rf ${HIVE_HOME}/lib/log4j-slf4j-impl-2.6.2.jar \
     && rm -f /tmp/${HIVE_FILE}
 
 # sqoop安装
