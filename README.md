@@ -34,6 +34,16 @@ bash zookeeper.sh
 ##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
 bash hadoop.sh  
 
+## 一些异常处理
+### 修改全部环境修改host
+```
+cat <<EOF > /etc/hosts
+192.168.71.225   kylin01 hadoop001 zookeeper1
+192.168.71.226   kylin02 hadoop002 zookeeper2
+192.168.71.228   kylin03 hadoop003 zookeeper3
+EOF
+```
+
 #### Hadoop启动  
 ##### 初次启动环境初始化  
 在hadoop1启动所有JournalNode：hadoop-daemons.sh start journalnode  

@@ -16,12 +16,12 @@
     <!--localizer IPC-->
     <property>
 　　　　<name>yarn.nodemanager.localizer.address</name>
-　　　　<value>hadoop:8040</value>
+　　　　<value>0.0.0.0:8040</value>
 　　</property>
     <!--http服务端口-->
     <property>
 　　　　<name>yarn.nodemanager.webapp.address</name>
-　　　　<value>hadoop:8042</value>
+　　　　<value>0.0.0.0:8042</value>
 　　</property>
     <property>
 　　　　<name>yarn.resourcemanager.hostname</name>
