@@ -21,27 +21,27 @@
     <!--保证数据恢复 shuen-->
     <property>
         <name>dfs.journalnode.http-address</name>
-        <value>0.0.0.0:8480</value>
+        <value>hadoop:8480</value>
     </property>
     <!--datanode 服务端口，用于数据传输-->
     <property>
         <name>dfs.datanode.address</name>
-        <value>0.0.0.0:50010</value>
+        <value>hadoop:50010</value>
     </property>
     <!--datanode http服务的端口-->
     <property>
         <name>dfs.datanode.http.address</name>
-        <value>0.0.0.0:50075</value>
+        <value>hadoop:50075</value>
     </property>
     <!--datanode ipc服务的端口-->
     <property>
         <name>dfs.datanode.ipc.address</name>
-        <value>0.0.0.0:50020</value>
+        <value>hadoop:50020</value>
     </property>
     <!--journalnode RPC服务-->
     <property>
         <name>dfs.journalnode.rpc-address</name>
-        <value>0.0.0.0:8485</value>
+        <value>hadoop:8485</value>
     </property>
     <!--指定hdfs副本数 -->
     <property>
@@ -50,11 +50,11 @@
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/usr/local/hadoop/dfs/name</value>
+        <value>file:/usr/local/hadoop/dfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/usr/local/hadoop/dfs/data</value>
+        <value>file:/usr/local/hadoop/dfs/data</value>
     </property>
     <!--指定hdfs的nameservice为nameservices001，需要和core-site.xml中的保持一致 -->
     <property>
@@ -99,16 +99,16 @@
     <!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行，如ssh端口不是hadoop:22则需明确指定，否则将无法成功选举namenide active节点-->
     <property>
         <name>dfs.ha.fencing.methods</name>
-        <value>sshfence(0.0.0.0:16022)</value>
+        <value>sshfence(hadoop:16022)</value>
     </property>
     <!-- 使用sshfence隔离机制时需要ssh免登陆 -->
     <property>
         <name>dfs.ha.fencing.ssh.private-key-files</name>
-        <value>/home/hadoop/.ssh/id_rsa</value>
+        <value>file:/home/hadoop/.ssh/id_rsa</value>
     </property>
     <property>
         <name>dfs.journalnode.edits.dir</name>
-        <value>/usr/local/hadoop/jn/data</value>
+        <value>file:/usr/local/hadoop/jn/data</value>
     </property>
     <!-- 开启NameNode失败自动切换 -->
     <property>
