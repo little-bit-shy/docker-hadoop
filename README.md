@@ -77,7 +77,7 @@ list-databases \
 [Sqoop使用简介](sqoop.md)  
 
 #### Kafka启动  
-kafka-server-start.sh -daemon ${KAFKA_HOME}/config/zookeeper.properties  
+kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties  
 [Kafka使用简介](kafka.md)  
 
 #### Spark启动  
