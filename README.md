@@ -35,9 +35,10 @@ bash zookeeper.sh
 
 ##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
 bash hadoop.sh
-`注意下载链接可能存在失效情况注意替换，如果出现下载过慢也可使用迅雷
-下载之后根据启动脚本修改文件名后放入/hadoop/tar/即可`
-![avatar](/help/download.png)
+
+**注意下载链接可能存在失效情况注意替换，如果出现下载过慢也可使用迅雷下载之后
+根据启动脚本修改文件名后放入/hadoop/tar/即可**
+![img](/help/download.png)
 
 #### Hadoop启动  
 ##### 初次启动环境初始化  
