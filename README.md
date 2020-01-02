@@ -34,7 +34,10 @@ bash zookeeper.sh
 修改hadoop/instances.yml，配置集群信息，用于生成hosts文件  
 
 ##### 依次启动环境（hadoop1、hadoop2 、hadoop3）  
-bash hadoop.sh  
+bash hadoop.sh
+**注意下载链接可能存在失效情况注意替换，如果出现下载过慢也可使用迅雷
+下载之后根据启动脚本修改文件名后放入/hadoop/tar/即可
+![avatar](/help/download.png)
 
 #### Hadoop启动  
 ##### 初次启动环境初始化  
@@ -61,8 +64,8 @@ bash hadoop.sh
 
 ##### 启动Hive  
 在hadoop1上启动：hiveserver2 &  
-[Hive使用简介](hive.md)  
-[PyHive使用简介](python.md)  
+[Hive使用简介](/help/hive.md)
+[PyHive使用简介](/help/python.md)
 
 #### Hbase启动  
 在hadoop1上启动：start-hbase.sh  
@@ -76,11 +79,11 @@ list-databases \
 --username root \
 --password 123456
 ```
-[Sqoop使用简介](sqoop.md)  
+[Sqoop使用简介](/help/sqoop.md)
 
 #### Kafka启动  
 kafka-server-start.sh -daemon ${KAFKA_HOME}/config/server.properties  
-[Kafka使用简介](kafka.md)  
+[Kafka使用简介](/help/kafka.md)
 
 #### Spark启动  
 在hadoop1上启动：${SPARK_HOME}/sbin/start-all.sh  
