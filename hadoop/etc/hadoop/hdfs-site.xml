@@ -18,6 +18,7 @@
 
 <configuration>
     <!--journalnode HTTP服务-->
+    <!--保证数据恢复 shuen-->
     <property>
         <name>dfs.journalnode.http-address</name>
         <value>hadoop:8480</value>
@@ -49,11 +50,11 @@
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/usr/local/hadoop/dfs/name</value>
+        <value>file:/usr/local/hadoop/dfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/usr/local/hadoop/dfs/data</value>
+        <value>file:/usr/local/hadoop/dfs/data</value>
     </property>
     <!--指定hdfs的nameservice为nameservices001，需要和core-site.xml中的保持一致 -->
     <property>
@@ -103,11 +104,11 @@
     <!-- 使用sshfence隔离机制时需要ssh免登陆 -->
     <property>
         <name>dfs.ha.fencing.ssh.private-key-files</name>
-        <value>/home/hadoop/.ssh/id_rsa</value>
+        <value>file:/home/hadoop/.ssh/id_rsa</value>
     </property>
     <property>
         <name>dfs.journalnode.edits.dir</name>
-        <value>/usr/local/hadoop/jn/data</value>
+        <value>file:/usr/local/hadoop/jn/data</value>
     </property>
     <!-- 开启NameNode失败自动切换 -->
     <property>

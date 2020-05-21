@@ -4,12 +4,12 @@
 dir=$(cd `dirname $0`; pwd)
 
 # 相关安装包下载
-HADOOP_URL=https://www-us.apache.org/dist/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
-HIVE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.4/apache-hive-2.3.4-bin.tar.gz
+HADOOP_URL=http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz
+HIVE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hive/hive-2.3.5/apache-hive-2.3.5-bin.tar.gz
 SQOOP_URL=http://mirrors.hust.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
 KAFKA_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz
 HBASE_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz
-SPARK_URL=https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz
+SPARK_URL=http://mirror.bit.edu.cn/apache/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz
 SCALA_URL=https://downloads.lightbend.com/scala/2.12.8/scala-2.12.8.tgz
 KYLIN_URL=https://mirrors.tuna.tsinghua.edu.cn/apache/kylin/apache-kylin-3.0.0-alpha/apache-kylin-3.0.0-alpha-bin-hbase1x.tar.gz
 
@@ -29,7 +29,7 @@ if [ ! -f "${dir}/hadoop/tar/hbase.tar.gz" ];then
   wget ${HBASE_URL} -O ${dir}/hadoop/tar/hbase.tar.gz
 fi
 if [ ! -f "${dir}/hadoop/tar/spark.tgz" ];then
-  wget ${HBASE_URL} -O ${dir}/hadoop/tar/spark.tgz
+  wget ${SPARK_URL} -O ${dir}/hadoop/tar/spark.tgz
 fi
 if [ ! -f "${dir}/hadoop/tar/scala.tgz" ];then
   wget ${SCALA_URL} -O ${dir}/hadoop/tar/scala.tgz
